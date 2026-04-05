@@ -476,6 +476,88 @@
       .btn { width: 100%; justify-content: center; }
       .button-row { flex-direction: column; }
     }
+    .temeria-card {
+  position: relative;
+  background: url("temeria.jpg") center/cover no-repeat;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 60px 30px;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Overlay scuro elegante */
+.temeria-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.1));
+}
+
+/* Contenuto sopra overlay */
+.temeria-card .video-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Titolo TEMERIA */
+.temeria-title {
+  font-size: 42px;
+  letter-spacing: 4px;
+  color: #fff;
+  margin: 10px 0 5px;
+  font-weight: 600;
+}
+
+/* Sottotitolo */
+.temeria-subtitle {
+  font-size: 18px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 20px;
+}
+
+/* Bottone */
+.temeria-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #7dd3fc, #c084fc);
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.temeria-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(192,132,252,0.5);
+}
+.temeria-card {
+  min-height: 460px; /* più grande = più impatto */
+}
+
+/* Effetto glow leggero */
+.temeria-title {
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+/* Effetto neve leggero */
+.temeria-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.08;
+  animation: snow 20s linear infinite;
+}
+
+@keyframes snow {
+  from { transform: translateY(0); }
+  to { transform: translateY(40px); }
+}
   </style>
 </head>
 <body>
@@ -634,18 +716,16 @@
       </div>
     </article>
 
-    <article class="video-card">
-      <div class="video-frame" style="display:flex;align-items:center;justify-content:center;color:white;font-size:18px;">
-        🎵 Prossimamente
-      </div>
-      <div class="video-content">
-        <div class="video-tag">✦ Prossimamente</div>
-        <h3>Nuove uscite</h3>
-        <p class="lead" style="font-size:15px;">
-          Questo spazio è pronto per il prossimo brano, videoclip o contenuto speciale.
-        </p>
-      </div>
-    </article>
+    <article class="video-card temeria-card">
+  <div class="video-content">
+    <div class="video-tag">✦ Prossimamente</div>
+
+    <h2 class="temeria-title">TEMERIA</h2>
+    <p class="temeria-subtitle">La Fata delle Piume</p>
+
+    <a href="#" class="temeria-btn">Scopri Temeria</a>
+  </div>
+</article>
 
   </div>
 
