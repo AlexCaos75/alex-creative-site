@@ -240,6 +240,58 @@
     .feature-grid { grid-template-columns: repeat(3, 1fr); }
     .gallery-grid { grid-template-columns: repeat(3, 1fr); }
     .video-grid { grid-template-columns: repeat(2, 1fr); }
+
+.temeria-wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.temeria-art {
+  min-height: 460px;
+  background: url("/temeria.jpg") center/cover no-repeat;
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.temeria-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.1));
+}
+
+.temeria-art-content {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  z-index: 2;
+}
+
+.temeria-video-panel {
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.temeria-video-panel video {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+}
+
+@media (max-width: 900px) {
+  .temeria-wide {
+    grid-template-columns: 1fr;
+  }
+}
     .contacts-grid { grid-template-columns: 0.8fr 1.2fr; }
 
     .section-title {
@@ -757,35 +809,32 @@
       </div>
     </article>
 
-   <article class="video-card temeria-card">
-  <div class="video-content temeria-layout">
+  <article class="temeria-wide">
 
-    <div class="temeria-text">
+  <div class="temeria-art">
+    <div class="temeria-art-content">
       <div class="video-tag">✦ Anteprima esclusiva</div>
-
       <h2 class="temeria-title">TEMERIA</h2>
       <p class="temeria-subtitle">La Fata delle Piume</p>
-
-      <p style="color:rgba(255,255,255,0.82); max-width:520px; line-height:1.7; margin: 0 0 18px;">
-        Un frammento in anteprima prima dell’uscita ufficiale su tutte le piattaforme.
-      </p>
-
-      <div>
-        <a href="#" class="temeria-btn">Presto disponibile</a>
-      </div>
+      <a href="#" class="temeria-btn">Presto disponibile</a>
     </div>
-
-    <div class="temeria-preview-box">
-      <video controls preload="metadata" poster="/temeria.jpg">
-        <source src="/temeria-preview.mp4" type="video/mp4">
-        Il tuo browser non supporta il video.
-      </video>
-    </div>
-
   </div>
+
+  <div class="temeria-video-panel">
+    <div class="video-tag">🎬 Video teaser</div>
+    <h3 style="font-size:26px; margin:0 0 12px;">Ascolta un frammento</h3>
+    <p style="color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 18px;">
+      Un assaggio riservato prima dell’uscita ufficiale su tutte le piattaforme.
+    </p>
+
+    <video controls preload="metadata" poster="/temeria.jpg">
+      <source src="/temeria-preview.mp4" type="video/mp4">
+      Il tuo browser non supporta il video.
+    </video>
+  </div>
+
 </article>
-  </div>
-
+</div>
   <!-- 🔥 SPOTIFY SECTION -->
 <div style="margin-top:60px; text-align:center;">
 
