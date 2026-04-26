@@ -558,6 +558,23 @@
   from { transform: translateY(0); }
   to { transform: translateY(40px); }
 }
+.temeria-preview-box {
+  width: 100%;
+  max-width: 320px;
+  margin: 16px 0 18px;
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.42);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.45);
+}
+
+.temeria-preview-box video {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+}
   </style>
 </head>
 <body>
@@ -727,11 +744,12 @@
       Un frammento in anteprima prima dell’uscita ufficiale su tutte le piattaforme.
     </p>
 
-   <video controls preload="metadata" style="width:100%; max-width:420px; border-radius:16px; margin: 8px 0 18px;">
-  <source src="temeria-preview.mp4" type="video/mp4">
-  Il tuo browser non supporta il video.
-</video>
-
+<div class="temeria-preview-box">
+  <video controls preload="metadata" poster="/temeria.jpg">
+    <source src="/temeria-preview.mp4" type="video/mp4">
+    Il tuo browser non supporta il video.
+  </video>
+</div>
     <div>
       <a href="#" class="temeria-btn">Presto disponibile</a>
     </div>
