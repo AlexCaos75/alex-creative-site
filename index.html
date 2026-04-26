@@ -558,10 +558,22 @@
   from { transform: translateY(0); }
   to { transform: translateY(40px); }
 }
-.temeria-preview-box {
+.temeria-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
   width: 100%;
-  max-width: 230px;
-  margin: 16px 0 18px;
+}
+
+.temeria-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.temeria-preview-box {
+  width: 260px;
+  flex-shrink: 0;
   padding: 10px;
   border-radius: 20px;
   background: rgba(0,0,0,0.42);
@@ -574,6 +586,18 @@
   width: 100%;
   display: block;
   border-radius: 16px;
+}
+
+@media (max-width: 760px) {
+  .temeria-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .temeria-preview-box {
+    width: 100%;
+    max-width: 320px;
+  }
 }
   </style>
 </head>
@@ -733,29 +757,33 @@
       </div>
     </article>
 
-    <article class="video-card temeria-card">
-  <div class="video-content">
-    <div class="video-tag">✦ Anteprima esclusiva</div>
+   <article class="video-card temeria-card">
+  <div class="video-content temeria-layout">
 
-    <h2 class="temeria-title">TEMERIA</h2>
-    <p class="temeria-subtitle">La Fata delle Piume</p>
+    <div class="temeria-text">
+      <div class="video-tag">✦ Anteprima esclusiva</div>
 
-    <p style="color:rgba(255,255,255,0.82); max-width:520px; line-height:1.7; margin: 0 0 18px;">
-      Un frammento in anteprima prima dell’uscita ufficiale su tutte le piattaforme.
-    </p>
+      <h2 class="temeria-title">TEMERIA</h2>
+      <p class="temeria-subtitle">La Fata delle Piume</p>
 
-<div class="temeria-preview-box">
-  <video controls preload="metadata" poster="/temeria.jpg">
-    <source src="/temeria-preview.mp4" type="video/mp4">
-    Il tuo browser non supporta il video.
-  </video>
-</div>
-    <div>
-      <a href="#" class="temeria-btn">Presto disponibile</a>
+      <p style="color:rgba(255,255,255,0.82); max-width:520px; line-height:1.7; margin: 0 0 18px;">
+        Un frammento in anteprima prima dell’uscita ufficiale su tutte le piattaforme.
+      </p>
+
+      <div>
+        <a href="#" class="temeria-btn">Presto disponibile</a>
+      </div>
     </div>
+
+    <div class="temeria-preview-box">
+      <video controls preload="metadata" poster="/temeria.jpg">
+        <source src="/temeria-preview.mp4" type="video/mp4">
+        Il tuo browser non supporta il video.
+      </video>
+    </div>
+
   </div>
 </article>
-
   </div>
 
   <!-- 🔥 SPOTIFY SECTION -->
