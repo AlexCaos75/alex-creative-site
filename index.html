@@ -651,6 +651,11 @@
     max-width: 320px;
   }
 }
+.temeria-card {
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
   </style>
 </head>
 <body>
@@ -809,19 +814,36 @@
       </div>
     </article>
 
-  <article class="temeria-wide">
+ <article class="temeria-card">
 
-  <div class="temeria-video-panel">
-    <div class="video-tag">🎬 Video teaser</div>
-    <h3 style="font-size:26px; margin:0 0 12px;">Ascolta un frammento</h3>
-    <p style="color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 18px;">
-      Un assaggio riservato prima dell’uscita ufficiale su tutte le piattaforme.
-    </p>
+  <div class="temeria-layout">
 
-    <video controls preload="metadata" poster="/temeria.jpg">
-      <source src="/temeria-preview.mp4" type="video/mp4">
-      Il tuo browser non supporta il video.
-    </video>
+    <div class="temeria-text">
+      <div class="video-tag">✦ Progetto in arrivo</div>
+
+      <div class="temeria-title">TEMERIA</div>
+      <div class="temeria-subtitle">
+        La fata delle piume sta per arrivare…
+      </div>
+
+      <p style="color:rgba(255,255,255,0.75); line-height:1.8; max-width:420px;">
+        Un frammento, un respiro, una presenza che non si vede ma si sente.
+        Questo non è solo un brano… è un mondo.
+      </p>
+
+      <a href="#"
+   class="temeria-btn"
+   onclick="openPage('chat')">
+  ✦ Entra nel mondo Temeria
+</a>
+    </div>
+
+    <div class="temeria-preview-box">
+      <video controls preload="metadata" poster="/temeria.jpg">
+        <source src="/temeria-preview.mp4" type="video/mp4">
+      </video>
+    </div>
+
   </div>
 
 </article>
@@ -983,61 +1005,134 @@
     </div>
   </footer>
 
-  <script>
-    const links = document.querySelectorAll('.nav-link');
-    const pages = document.querySelectorAll('.page');
-    const buttonLinks = document.querySelectorAll('[data-page-button]');
+<script>
+/* -------------------------
+   NAVIGAZIONE PAGINE
+-------------------------- */
+const links = document.querySelectorAll('.nav-link');
+const pages = document.querySelectorAll('.page');
+const buttonLinks = document.querySelectorAll('[data-page-button]');
 
-    function openPage(page) {
-      pages.forEach(p => p.classList.remove('active'));
-      links.forEach(l => l.classList.remove('active'));
+function openPage(page) {
+  pages.forEach(p => p.classList.remove('active'));
+  links.forEach(l => l.classList.remove('active'));
 
-      const targetPage = document.getElementById(`page-${page}`);
-      if (targetPage) targetPage.classList.add('active');
+  const targetPage = document.getElementById(`page-${page}`);
+  if (targetPage) targetPage.classList.add('active');
 
-      const targetLink = document.querySelector(`.nav-link[data-page="${page}"]`);
-      if (targetLink) targetLink.classList.add('active');
+  const targetLink = document.querySelector(`.nav-link[data-page="${page}"]`);
+  if (targetLink) targetLink.classList.add('active');
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        openPage(link.dataset.page);
-      });
-    });
+links.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    openPage(link.dataset.page);
+  });
+});
 
-    buttonLinks.forEach(btn => {
-      btn.addEventListener('click', () => openPage(btn.dataset.pageButton));
-    });
+buttonLinks.forEach(btn => {
+  btn.addEventListener('click', () => openPage(btn.dataset.pageButton));
+});
 
-    const chatInput = document.getElementById('chatInput');
-    const chatSend = document.getElementById('chatSend');
-    const chatMessages = document.getElementById('chatMessages');
+/* -------------------------
+   CHAT TEMERIA
+-------------------------- */
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatMessages = document.getElementById('chatMessages');
 
-    function sendMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
+function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text) return;
 
-      const userBubble = document.createElement('div');
-      userBubble.className = 'bubble user';
-      userBubble.textContent = text;
-      chatMessages.appendChild(userBubble);
+  // messaggio utente
+  const userBubble = document.createElement('div');
+  userBubble.className = 'bubble user';
+  userBubble.textContent = text;
+  chatMessages.appendChild(userBubble);
 
-      const siteBubble = document.createElement('div');
-      siteBubble.className = 'bubble site';
-      siteBubble.textContent = `Messaggio ricevuto: “${text}”. Questa è una chat demo moderna, pronta per essere collegata a un sistema reale.`;
-      chatMessages.appendChild(siteBubble);
+  // risposta iniziale Temeria
+  const siteBubble = document.createElement('div');
+  siteBubble.className = 'bubble site';
+  siteBubble.textContent = "Temeria sta ascoltando...";
+  chatMessages.appendChild(siteBubble);
 
-      chatInput.value = '';
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+  // chiamata server (quando lo collegheremo)
+  fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: text })
+  })
+  .then(res => res.json())
+  .then(data => {
+    siteBubble.textContent = data.reply;
+  })
+  .catch(() => {
+    siteBubble.textContent = "Temeria è lontana… riprova.";
+  });
 
-    chatSend.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') sendMessage();
-    });
-  </script>
+  chatInput.value = '';
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// EVENTI CHAT (questi mancavano ❗)
+chatSend.addEventListener('click', sendMessage);
+
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') sendMessage();
+});
+
+/* -------------------------
+   ANIMAZIONE TEMERIA
+-------------------------- */
+function revealTemeria() {
+  const temeriaCard = document.querySelector('.temeria-card');
+  if (!temeriaCard) return;
+
+  const rect = temeriaCard.getBoundingClientRect();
+
+  if (rect.top < window.innerHeight - 100) {
+    temeriaCard.style.transform = "scale(1)";
+    temeriaCard.style.opacity = "1";
+  }
+}
+
+window.addEventListener('scroll', revealTemeria);
+
+buttonLinks.forEach(btn => {
+  btn.addEventListener('click', () => {
+    setTimeout(revealTemeria, 200);
+  });
+});
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    setTimeout(revealTemeria, 200);
+  });
+});
+</script>
+ <script>
+fetch('https://api.countapi.xyz/hit/alexcreative.site/visite')
+.then(res => res.json())
+.then(data => {
+  const counter = document.createElement('div');
+  counter.style.position = "fixed";
+  counter.style.bottom = "10px";
+  counter.style.right = "15px";
+  counter.style.fontSize = "12px";
+  counter.style.opacity = "0.6";
+  counter.style.color = "white";
+  counter.innerText = `Visite: ${data.value}`;
+  document.body.appendChild(counter);
+})
+.catch(() => {
+  console.log("Contatore non disponibile");
+});
+</script>
 </body>
 </html>
