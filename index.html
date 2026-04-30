@@ -651,11 +651,6 @@
     max-width: 320px;
   }
 }
-.temeria-card {
-  transform: scale(0.95);
-  opacity: 0;
-  transition: all 0.6s ease;
-}
   </style>
 </head>
 <body>
@@ -814,36 +809,19 @@
       </div>
     </article>
 
- <article class="temeria-card">
+  <article class="temeria-wide">
 
-  <div class="temeria-layout">
+  <div class="temeria-video-panel">
+    <div class="video-tag">🎬 Video teaser</div>
+    <h3 style="font-size:26px; margin:0 0 12px;">Ascolta un frammento</h3>
+    <p style="color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 18px;">
+      Un assaggio riservato prima dell’uscita ufficiale su tutte le piattaforme.
+    </p>
 
-    <div class="temeria-text">
-      <div class="video-tag">✦ Progetto in arrivo</div>
-
-      <div class="temeria-title">TEMERIA</div>
-      <div class="temeria-subtitle">
-        La fata delle piume sta per arrivare…
-      </div>
-
-      <p style="color:rgba(255,255,255,0.75); line-height:1.8; max-width:420px;">
-        Un frammento, un respiro, una presenza che non si vede ma si sente.
-        Questo non è solo un brano… è un mondo.
-      </p>
-
-      <a href="#"
-   class="temeria-btn"
-   onclick="openPage('chat')">
-  ✦ Entra nel mondo Temeria
-</a>
-    </div>
-
-    <div class="temeria-preview-box">
-      <video controls preload="metadata" poster="/temeria.jpg">
-        <source src="/temeria-preview.mp4" type="video/mp4">
-      </video>
-    </div>
-
+    <video controls preload="metadata" poster="/temeria.jpg">
+      <source src="/temeria-preview.mp4" type="video/mp4">
+      Il tuo browser non supporta il video.
+    </video>
   </div>
 
 </article>
@@ -1005,7 +983,7 @@
     </div>
   </footer>
 
-<script>
+ <script>
 /* -------------------------
    NAVIGAZIONE PAGINE
 -------------------------- */
@@ -1037,8 +1015,9 @@ buttonLinks.forEach(btn => {
   btn.addEventListener('click', () => openPage(btn.dataset.pageButton));
 });
 
+
 /* -------------------------
-   CHAT TEMERIA
+   CHAT ASSISTENTE (Alex Creative)
 -------------------------- */
 const chatInput = document.getElementById('chatInput');
 const chatSend = document.getElementById('chatSend');
@@ -1054,84 +1033,48 @@ function sendMessage() {
   userBubble.textContent = text;
   chatMessages.appendChild(userBubble);
 
-  // risposta iniziale Temeria
+  // scroll immediato (effetto fluido)
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // risposta assistente
   const siteBubble = document.createElement('div');
   siteBubble.className = 'bubble site';
-  siteBubble.textContent = "Temeria sta ascoltando...";
+  siteBubble.textContent = "Assistente Alex Creative: sto elaborando la tua richiesta...";
   chatMessages.appendChild(siteBubble);
 
-  // chiamata server (quando lo collegheremo)
-  fetch("http://localhost:3000/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ message: text })
-  })
-  .then(res => res.json())
-  .then(data => {
-    siteBubble.textContent = data.reply;
-  })
-  .catch(() => {
-    siteBubble.textContent = "Temeria è lontana… riprova.";
-  });
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // risposta simulata elegante
+  setTimeout(() => {
+  let reply = "";
+
+  const lower = text.toLowerCase();
+
+  if (lower.includes("chi è alex")) {
+    reply = "Alex Creative è un progetto artistico e creativo che unisce musica, identità digitale e contenuti multimediali.";
+  } 
+  else if (lower.includes("temeria")) {
+    reply = "Temeria è un progetto artistico in fase di sviluppo, legato a un universo creativo più ampio.";
+  } 
+  else if (lower.includes("musica") || lower.includes("canzoni")) {
+    reply = "Puoi ascoltare i contenuti nella sezione Video o direttamente su Spotify.";
+  } 
+  else {
+    reply = "Assistente Alex Creative: grazie per il messaggio. Questo spazio è in evoluzione e presto offrirà interazioni più avanzate.";
+  }
+
+  siteBubble.textContent = reply;
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}, 1000);
 
   chatInput.value = '';
-  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// EVENTI CHAT (questi mancavano ❗)
+// eventi chat
 chatSend.addEventListener('click', sendMessage);
 
 chatInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') sendMessage();
-});
-
-/* -------------------------
-   ANIMAZIONE TEMERIA
--------------------------- */
-function revealTemeria() {
-  const temeriaCard = document.querySelector('.temeria-card');
-  if (!temeriaCard) return;
-
-  const rect = temeriaCard.getBoundingClientRect();
-
-  if (rect.top < window.innerHeight - 100) {
-    temeriaCard.style.transform = "scale(1)";
-    temeriaCard.style.opacity = "1";
-  }
-}
-
-window.addEventListener('scroll', revealTemeria);
-
-buttonLinks.forEach(btn => {
-  btn.addEventListener('click', () => {
-    setTimeout(revealTemeria, 200);
-  });
-});
-
-links.forEach(link => {
-  link.addEventListener('click', () => {
-    setTimeout(revealTemeria, 200);
-  });
-});
-</script>
- <script>
-fetch('https://api.countapi.xyz/hit/alexcreative.site/visite')
-.then(res => res.json())
-.then(data => {
-  const counter = document.createElement('div');
-  counter.style.position = "fixed";
-  counter.style.bottom = "10px";
-  counter.style.right = "15px";
-  counter.style.fontSize = "12px";
-  counter.style.opacity = "0.6";
-  counter.style.color = "white";
-  counter.innerText = `Visite: ${data.value}`;
-  document.body.appendChild(counter);
-})
-.catch(() => {
-  console.log("Contatore non disponibile");
 });
 </script>
 </body>
