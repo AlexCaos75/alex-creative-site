@@ -1,74 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Temeria – La Fata delle Piume</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta property="og:title" content="Temeria – La Fata delle Piume">
-<meta property="og:description" content="Un frammento dal mondo di Temeria. Entra e lasciati trasportare.">
-<meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-fb2.jpg">
+<title>Temeria - La Fata delle Piume</title>
+
+<link rel="icon" href="https://alex-creative-site.vercel.app/temeria-preview.jpg">
+
+<meta property="og:title" content="Temeria - La Fata delle Piume">
+<meta property="og:description" content="Una presenza che non si vede… ma si sente. Tra sogno e realtà nasce Temeria, la fata delle piume. Un viaggio tra musica, emozione e magia. Lasciati trasportare.">
+<meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-fb1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://alex-creative-site.vercel.app/temeria-video.html">
-<meta property="og:type" content="video.other">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alex Creative Site">
+
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
-body{background:black;color:white;text-align:center;font-family:Arial;}
-.container{max-width:700px;margin:auto;padding:20px;}
+body{
+  background:black;
+  color:white;
+  text-align:center;
+  font-family:Arial, sans-serif;
+  margin:0;
+  padding:0;
+}
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px;
+}
+.hero-img{
+  width:100%;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 0 25px rgba(255,255,255,0.15);
+}
+.home-btn{
+  display:block;
+  margin:25px auto;
+  padding:14px 26px;
+  border-radius:30px;
+  background:linear-gradient(90deg,#7dd3fc,#c084fc);
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+  max-width:260px;
+}
+.play-btn{
+  margin:25px auto 10px;
+  padding:16px 32px;
+  border:none;
+  border-radius:35px;
+  background:linear-gradient(90deg,#7dd3fc,#c084fc);
+  color:black;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(192,132,252,0.45);
+}
+.play-btn:hover{
+  transform:scale(1.03);
+}
+video{
+  display:none;
+  width:100%;
+  border-radius:20px;
+  margin-top:20px;
+}
+p{
+  font-size:18px;
+  line-height:1.5;
+}
 </style>
 </head>
 
 <body>
 
-<!-- PLAYER COVER -->
-<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" 
-style="cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
-
-<img src="https://alex-creative-site.vercel.app/temeria-preview.jpg" style="width:100%;border-radius:20px;">
-
-<div style="
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:80px;
-height:80px;
-border-radius:50%;
-background:rgba(255,255,255,0.9);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:35px;
-color:black;
-box-shadow:0 0 20px rgba(0,0,0,0.6);
-">
-▶
-</div>
-
-</div>
-
 <div class="container">
 
-<a href="https://alex-creative-site.vercel.app" style="
-display:block;
-margin:20px auto;
-padding:14px 26px;
-border-radius:30px;
-background:linear-gradient(90deg,#7dd3fc,#c084fc);
-color:black;
-font-weight:bold;
-text-decoration:none;
-max-width:260px;">
-🏠 Torna alla home
-</a>
+<img src="https://alex-creative-site.vercel.app/temeria-preview.jpg" class="hero-img" alt="Temeria - La Fata delle Piume">
 
-<h2>Temeria – La Fata delle Piume</h2>
-<p>Un frammento dal mondo di Temeria. Entra e lasciati trasportare.</p>
+<a href="https://alex-creative-site.vercel.app" class="home-btn">🏠 Torna alla home</a>
 
-<video id="v" controls playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg" 
-style="display:none;width:100%;border-radius:20px;margin-top:15px;">
+<h1>Temeria - La Fata delle Piume</h1>
+
+<p>Una presenza che non si vede… ma si sente. Tra sogno e realtà nasce Temeria, la fata delle piume. Un viaggio tra musica, emozione e magia. Lasciati trasportare.</p>
+
+<button id="playBtn" class="play-btn" onclick="avviaVideo()">
+▶ Ascolta / Guarda
+</button>
+
+<video id="v" controls playsinline preload="metadata" poster="https://alex-creative-site.vercel.app/temeria-preview.jpg">
   <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
 </video>
 
 </div>
+
+<script>
+function avviaVideo(){
+  const v = document.getElementById('v');
+  const btn = document.getElementById('playBtn');
+
+  v.style.display = 'block';
+  btn.style.display = 'none';
+
+  setTimeout(() => {
+    v.play();
+  }, 200);
+}
+</script>
 
 </body>
 </html>
