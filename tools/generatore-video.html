@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>🎬 Temeria ULTRA Generator</title>
+<title>🎬 Temeria ULTRA Generator PRO</title>
 
 <style>
 body {
@@ -93,6 +93,11 @@ function fix(file){
  return base+"/"+file;
 }
 
+// 🔥 FIX DESCRIZIONE (no a capo)
+function cleanDesc(text){
+ return text.replace(/\n/g,' ').replace(/\s+/g,' ').trim();
+}
+
 function genera(){
 
 if(!titleEl().value || !videoEl().value || !imageEl().value || !pageEl().value){
@@ -101,11 +106,11 @@ if(!titleEl().value || !videoEl().value || !imageEl().value || !pageEl().value){
 }
 
 const title = titleEl().value;
-const desc = descEl().value;
+const desc = cleanDesc(descEl().value);
 const video = fix(videoEl().value);
 const img = fix(imageEl().value);
 
-// 🔥 AUTOMATICO: fallback FB image
+// fallback immagine FB
 let fb = imageFBEl().value ? fix(imageFBEl().value) : img;
 
 // URL pulito
@@ -118,7 +123,7 @@ pageEl().value = page;
 
 const url = base+"/"+page+".html";
 
-// ANTEPRIMA
+// preview
 preview().innerHTML = `
 <h3>${title}</h3>
 <img src="${img}">
@@ -128,14 +133,17 @@ preview().innerHTML = `
 </video>
 `;
 
-// HTML GENERATO
+// HTML finale
 const html = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>${title}</title>
 
-<!-- OPEN GRAPH (FIXATO) -->
+<link rel="icon" href="${img}">
+
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
 <meta property="og:image" content="${fb}">
@@ -143,8 +151,8 @@ const html = `<!DOCTYPE html>
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="video.other">
+<meta property="og:site_name" content="Alex Creative Site">
 
-<!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
@@ -155,9 +163,16 @@ body{background:black;color:white;text-align:center;font-family:Arial;}
 
 <body>
 
-<!-- PLAYER COVER -->
-<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" 
-style="cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
+<div onclick="
+this.style.opacity='0';
+setTimeout(()=>{
+ this.style.display='none';
+ let v=document.getElementById('v');
+ v.style.display='block';
+ v.play();
+},300);
+"
+style="transition:0.3s;cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
 
 <img src="${img}" style="width:100%;border-radius:20px;">
 
@@ -200,7 +215,7 @@ max-width:260px;">
 <h2>${title}</h2>
 <p>${desc}</p>
 
-<video id="v" controls playsinline poster="${img}" 
+<video id="v" controls playsinline preload="metadata" poster="${img}" 
 style="display:none;width:100%;border-radius:20px;margin-top:15px;">
   <source src="${video}" type="video/mp4">
 </video>
