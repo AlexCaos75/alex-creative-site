@@ -2,252 +2,239 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>🎬 Generatore Video Temeria PRO</title>
+<title>🎬 Temeria ULTRA Generator</title>
 
 <style>
 body {
   background:#0b0f1a;
   color:white;
   font-family:Arial;
-  padding:30px;
+  padding:20px;
 }
 
 input, textarea {
   width:100%;
   padding:10px;
-  margin:8px 0;
+  margin:6px 0;
   border-radius:10px;
   border:none;
 }
 
 button {
-  padding:12px 20px;
-  background:white;
-  color:black;
+  padding:10px;
+  margin:4px;
   border:none;
   border-radius:10px;
   cursor:pointer;
+  font-weight:bold;
 }
 
-textarea {
-  height:200px;
+.main-btn { background:#22c55e; color:black; }
+.copy-btn { background:white; color:black; }
+.danger { background:#ef4444; color:white; }
+
+.box {
+  background:#111827;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
 }
 
-.preview {
-  margin-top:20px;
-  text-align:center;
-}
-
-.preview video {
-  width:100%;
-  max-width:500px;
+.preview img, .preview video {
+  max-width:400px;
   border-radius:15px;
 }
 
-.preview img {
-  max-width:500px;
-  border-radius:15px;
-}
-
-.error {
-  color:red;
-  font-size:14px;
+.card {
+  background:#1f2937;
+  padding:10px;
+  border-radius:10px;
+  margin:5px;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h2>🎬 Generatore Video Temeria PRO</h2>
+<h2>🚀 Temeria ULTRA Generator</h2>
 
-<input id="title" placeholder="Titolo video">
+<input id="title" placeholder="Titolo">
 <textarea id="desc" placeholder="Descrizione"></textarea>
-<input id="video" placeholder="Video (es: temeria-preview.mp4)">
-<input id="imageSite" placeholder="Immagine SITO (es: temeria-preview.jpg)">
-<input id="imageFB" placeholder="Immagine FACEBOOK 1200x630 (es: temeria-fb.jpg)">
-<input id="page" placeholder="Nome pagina (es: temeria-video)">
+<input id="video" placeholder="Video.mp4">
+<input id="imageSite" placeholder="Immagine SITO">
+<input id="imageFB" placeholder="Immagine FACEBOOK">
+<input id="page" placeholder="Nome pagina">
 
-<button onclick="genera()">🚀 Genera tutto</button>
+<button class="main-btn" onclick="genera()">🚀 Genera</button>
+<button onclick="salva()">💾 Salva progetto</button>
 
-<div class="error" id="error"></div>
+<div id="preview" class="box"></div>
 
-<h3>👁 Anteprima</h3>
-<div class="preview" id="preview"></div>
-
-<h3>📄 Pagina Video</h3>
+<div class="box">
+<h3>📄 Codice</h3>
 <textarea id="output"></textarea>
+<button class="copy-btn" onclick="copy('output')">📋 Copia</button>
+<button onclick="download()">⬇️ Scarica</button>
+</div>
 
-<h3>🌐 Blocco per index.html</h3>
-<textarea id="indexBlock"></textarea>
-
-<h3>🔗 Link pronto</h3>
+<div class="box">
+<h3>🔗 Link</h3>
 <textarea id="linkOut"></textarea>
+<button class="copy-btn" onclick="copy('linkOut')">📋 Copia</button>
+</div>
+
+<div class="box">
+<h3>🎞 Archivio Progetti</h3>
+<div id="lista"></div>
+</div>
 
 <script>
-function fixPath(file) {
-  if (!file) return "";
-  if (file.startsWith("http")) return file;
-  return "https://alex-creative-site.vercel.app/" + file;
+
+const base = "https://alex-creative-site.vercel.app";
+
+function fix(file){
+ if(file.startsWith("http")) return file;
+ return base+"/"+file;
 }
 
-function genera() {
+function genera(){
 
-  const title = document.getElementById('title').value;
-  const desc = document.getElementById('desc').value;
-  const video = document.getElementById('video').value;
-  const imageSite = document.getElementById('imageSite').value;
-  const imageFB = document.getElementById('imageFB').value;
-  const page = document.getElementById('page').value;
+ const title = titleEl().value;
+ const desc = descEl().value;
+ const video = fix(videoEl().value);
+ const img = fix(imageEl().value);
+ const fb = fix(imageFBEl().value);
+ const page = pageEl().value;
 
-  const errorBox = document.getElementById('error');
-  errorBox.innerText = "";
+ const url = base+"/"+page+".html";
 
-  if (!title || !video || !imageSite || !imageFB || !page) {
-    errorBox.innerText = "⚠️ Compila tutti i campi obbligatori";
-    return;
-  }
+ preview().innerHTML = `
+ <h3>${title}</h3>
+ <img src="${img}">
+ <br><br>
+ <video controls src="${video}"></video>
+ `;
 
-  const base = "https://alex-creative-site.vercel.app";
-  const url = base + "/" + page + ".html";
-
-  const videoPath = fixPath(video);
-  const imageSitePath = fixPath(imageSite);
-  const imageFBPath = fixPath(imageFB);
-
-  // ANTEPRIMA
-  document.getElementById('preview').innerHTML = `
-    <h4>${title}</h4>
-    <img src="${imageSitePath}">
-    <br><br>
-    <video controls src="${videoPath}"></video>
-  `;
-
-  // PAGINA VIDEO (STRINGA SICURA)
-  const codice = `<!DOCTYPE html>
-<html lang="it">
+ const html = `<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <title>${title}</title>
 
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
-<meta property="og:image" content="${imageFBPath}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="${fb}">
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="video.other">
 
-<meta name="twitter:card" content="summary_large_image">
-
 <style>
-body {
-  margin:0;
-  background:black;
-  color:white;
-  text-align:center;
-  font-family:Arial;
-}
-
-.container {
-  max-width:700px;
-  margin:auto;
-  padding:20px;
-}
-
-.top-btn {
-  display:inline-block;
-  margin-bottom:20px;
-  padding:12px 26px;
-  border-radius:30px;
-  background:white;
-  color:black;
-  font-weight:bold;
-  text-decoration:none;
-}
-
-.floating-btn {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  padding:12px 20px;
-  border-radius:30px;
-  background:linear-gradient(90deg,#7dd3fc,#c084fc);
-  color:black;
-  font-weight:bold;
-  text-decoration:none;
-}
+body{background:black;color:white;text-align:center;font-family:Arial;}
+.container{max-width:700px;margin:auto;padding:20px;}
 </style>
-
 </head>
 
 <body>
 
-<a href="${videoPath}">
-  <img src="${imageFBPath}" style="width:100%;max-width:700px;border-radius:20px;">
+<a href="${video}">
+<img src="${fb}" style="width:100%;">
 </a>
 
 <div class="container">
 
-<a href="${base}" class="top-btn">🌐 Vai al sito completo</a>
-
 <h2>${title}</h2>
 <p>${desc}</p>
 
-<div id="cover" style="position:relative;cursor:pointer;max-width:700px;margin:auto;">
-  <img src="${imageSitePath}" style="width:100%;border-radius:20px;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:70px;height:70px;border-radius:50%;background:white;
-    display:flex;align-items:center;justify-content:center;font-size:28px;color:black;">
-    ▶
-  </div>
+<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();">
+<img src="${img}" style="width:100%;">
 </div>
 
-<video id="video" controls style="display:none;width:100%;max-width:700px;border-radius:20px;margin-top:20px;">
-  <source src="${videoPath}" type="video/mp4">
-</video>
-
-<div id="cover" onclick="this.style.display='none';document.getElementById('video').style.display='block';document.getElementById('video').play();" style="position:relative;cursor:pointer;max-width:700px;margin:auto;">
-  <img src="${imageSitePath}" style="width:100%;border-radius:20px;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:70px;height:70px;border-radius:50%;background:white;
-    display:flex;align-items:center;justify-content:center;font-size:28px;color:black;">
-    ▶
-  </div>
-</div>
-
-<video id="video" controls style="display:none;width:100%;max-width:700px;border-radius:20px;margin-top:20px;">
-  <source src="${videoPath}" type="video/mp4">
+<video id="v" controls style="display:none;width:100%;">
+<source src="${video}">
 </video>
 
 </div>
-
-<a href="${base}" class="floating-btn">🌐 Sito</a>
-
 </body>
 </html>`;
 
- </html>`;
-
-const codice = `<!DOCTYPE html>
-<html lang="it">
-...
-</body>
-</html>`;
-
-const blocco = `<a href="${url}" style="text-decoration:none;color:white;">
-<div style="border-radius:20px;overflow:hidden;position:relative;max-width:400px;margin:auto;">
-  <img src="${imageSitePath}" style="width:100%;">
-  <div style="position:absolute;bottom:0;left:0;right:0;padding:10px;background:rgba(0,0,0,0.7);">
-    <strong>${title}</strong>
-    <p style="margin:0;font-size:13px;">Guarda il frammento</p>
-  </div>
-</div>
-</a>`;
-
-  document.getElementById('output').value = codice;
-  document.getElementById('indexBlock').value = blocco;
-  document.getElementById('linkOut').value = url;
+ output().value = html;
+ link().value = url;
 }
+
+function salva(){
+ const data = {
+  title:titleEl().value,
+  desc:descEl().value,
+  video:videoEl().value,
+  image:imageEl().value,
+  fb:imageFBEl().value,
+  page:pageEl().value
+ };
+ let arr = JSON.parse(localStorage.getItem("temeria")||"[]");
+ arr.push(data);
+ localStorage.setItem("temeria",JSON.stringify(arr));
+ caricaLista();
+}
+
+function caricaLista(){
+ let arr = JSON.parse(localStorage.getItem("temeria")||"[]");
+ lista().innerHTML = "";
+ arr.forEach((p,i)=>{
+  lista().innerHTML += `
+  <div class="card" onclick="load(${i})">
+   ${p.title}
+   <button class="danger" onclick="del(${i});event.stopPropagation()">X</button>
+  </div>`;
+ });
+}
+
+function load(i){
+ let arr = JSON.parse(localStorage.getItem("temeria"));
+ let p = arr[i];
+ titleEl().value=p.title;
+ descEl().value=p.desc;
+ videoEl().value=p.video;
+ imageEl().value=p.image;
+ imageFBEl().value=p.fb;
+ pageEl().value=p.page;
+}
+
+function del(i){
+ let arr = JSON.parse(localStorage.getItem("temeria"));
+ arr.splice(i,1);
+ localStorage.setItem("temeria",JSON.stringify(arr));
+ caricaLista();
+}
+
+function copy(id){
+ let el=document.getElementById(id);
+ el.select();
+ document.execCommand("copy");
+ alert("Copiato!");
+}
+
+function download(){
+ let blob=new Blob([output().value],{type:"text/html"});
+ let a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);
+ a.download="temeria.html";
+ a.click();
+}
+
+// helpers
+const titleEl=()=>document.getElementById("title");
+const descEl=()=>document.getElementById("desc");
+const videoEl=()=>document.getElementById("video");
+const imageEl=()=>document.getElementById("imageSite");
+const imageFBEl=()=>document.getElementById("imageFB");
+const pageEl=()=>document.getElementById("page");
+const output=()=>document.getElementById("output");
+const link=()=>document.getElementById("linkOut");
+const preview=()=>document.getElementById("preview");
+const lista=()=>document.getElementById("lista");
+
+caricaLista();
+
 </script>
 
 </body>
