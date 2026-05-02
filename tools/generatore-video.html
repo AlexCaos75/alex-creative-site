@@ -100,35 +100,40 @@ function fix(file){
 }
 
 function genera(){
+
 if(!titleEl().value || !videoEl().value || !imageEl().value || !imageFBEl().value || !pageEl().value){
  alert("Compila tutti i campi");
  return;
 }
- const title = titleEl().value;
- const desc = descEl().value;
- const video = fix(videoEl().value);
- const img = fix(imageEl().value);
- const fb = fix(imageFBEl().value);
-const page = pageEl().value
-  .toLowerCase()
-  .replace(/\s+/g,'-')
-  .replace(/[^a-z0-9\-]/g,'');
+
+const title = titleEl().value;
+const desc = descEl().value;
+const video = fix(videoEl().value);
+const img = fix(imageEl().value);
+const fb = fix(imageFBEl().value);
+
+// URL pulito
+let page = pageEl().value
+.toLowerCase()
+.replace(/\s+/g,'-')
+.replace(/[^a-z0-9\-]/g,'');
 
 pageEl().value = page;
 
+const url = base+"/"+page+".html";
 
- const url = base+"/"+page+".html";
-
- preview().innerHTML = `
- <h3>${title}</h3>
- <img src="${img}">
- <br><br>
- <video controls style="margin-top:10px;">
+// ANTEPRIMA
+preview().innerHTML = `
+<h3>${title}</h3>
+<img src="${img}">
+<br><br>
+<video controls>
   <source src="${video}" type="video/mp4">
 </video>
- `;
+`;
 
- const html = `<!DOCTYPE html>
+// HTML GENERATO
+const html = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -148,12 +153,7 @@ body{background:black;color:white;text-align:center;font-family:Arial;}
 
 <body>
 
-<!-- 🔥 IMMAGINE FACEBOOK (serve per anteprima) -->
-<div style="display:block;text-decoration:none;">
-<img src="${fb}" style="width:100%;max-width:700px;border-radius:20px;">
-</a>
-
-<!-- 🎬 PLAYER -->
+<!-- PLAYER COVER -->
 <div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" 
 style="cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
 
@@ -198,7 +198,8 @@ max-width:260px;">
 <h2>${title}</h2>
 <p>${desc}</p>
 
-<video id="v" controls playsinline poster="${img}" style="display:none;width:100%;border-radius:20px;margin-top:15px;">
+<video id="v" controls playsinline poster="${img}" 
+style="display:none;width:100%;border-radius:20px;margin-top:15px;">
   <source src="${video}" type="video/mp4">
 </video>
 
@@ -207,30 +208,31 @@ max-width:260px;">
 </body>
 </html>`;
 
- output().value = html;
- link().value = url;
+output().value = html;
+link().value = url;
+
 }
 
+// STORAGE
 function salva(){
- const data = {
+ let arr = JSON.parse(localStorage.getItem("temeria")||"[]");
+ arr.push({
   title:titleEl().value,
   desc:descEl().value,
   video:videoEl().value,
   image:imageEl().value,
   fb:imageFBEl().value,
   page:pageEl().value
- };
- let arr = JSON.parse(localStorage.getItem("temeria")||"[]");
- arr.push(data);
+ });
  localStorage.setItem("temeria",JSON.stringify(arr));
  caricaLista();
 }
 
 function caricaLista(){
  let arr = JSON.parse(localStorage.getItem("temeria")||"[]");
- lista().innerHTML = "";
+ lista().innerHTML="";
  arr.forEach((p,i)=>{
-  lista().innerHTML += `
+  lista().innerHTML+=`
   <div class="card" onclick="load(${i})">
    ${p.title}
    <button class="danger" onclick="del(${i});event.stopPropagation()">X</button>
@@ -239,8 +241,7 @@ function caricaLista(){
 }
 
 function load(i){
- let arr = JSON.parse(localStorage.getItem("temeria"));
- let p = arr[i];
+ let p = JSON.parse(localStorage.getItem("temeria"))[i];
  titleEl().value=p.title;
  descEl().value=p.desc;
  videoEl().value=p.video;
@@ -256,6 +257,7 @@ function del(i){
  caricaLista();
 }
 
+// UTILITY
 function copy(id){
  let el=document.getElementById(id);
  el.select();
@@ -267,7 +269,7 @@ function download(){
  let blob=new Blob([output().value],{type:"text/html"});
  let a=document.createElement("a");
  a.href=URL.createObjectURL(blob);
-a.download = pageEl().value + ".html";
+ a.download = pageEl().value + ".html";
  a.click();
 }
 
