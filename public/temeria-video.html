@@ -25,20 +25,15 @@
 body {
   margin:0;
   background:black;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  min-height:100vh;
   color:white;
-  font-family:Arial;
   text-align:center;
-  padding:30px 15px;
+  font-family:Arial;
 }
 
 .container {
   max-width:700px;
-  width:100%;
+  margin:auto;
+  padding:20px;
 }
 
 video {
@@ -77,14 +72,17 @@ video {
 
 <body>
 
+<!-- 🔥 FALLBACK FACEBOOK (FONDAMENTALE) -->
+<a href="https://alex-creative-site.vercel.app/temeria-preview.mp4" style="display:block;text-decoration:none;">
+  <img src="https://alex-creative-site.vercel.app/temeria-fb.jpg" style="width:100%;max-width:700px;border-radius:20px;">
+</a>
+
 <div class="container">
 
 <a href="https://alex-creative-site.vercel.app" class="top-btn">🌐 Vai al sito completo</a>
 
 <h2>Temeria - Anteprima</h2>
 <p>Un frammento del mio mondo creativo. Entra in Temeria.</p>
-
-<img src="https://alex-creative-site.vercel.app/temeria-fb.jpg" style="width:100%; border-radius:20px; margin-bottom:15px;">
 
 <video controls muted autoplay playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg">
   <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
