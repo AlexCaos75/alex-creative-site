@@ -1,96 +1,40 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
 <meta charset="UTF-8">
-
 <title>Temeria - Anteprima</title>
 
 <meta property="og:title" content="Temeria - Anteprima">
-<meta property="og:description" content="Un frammento del mio mondo creativo. Entra in Temeria.">
+<meta property="og:description" content="Un frammento del mondo Temeria">
 <meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-fb.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://alex-creative-site.vercel.app/temeria-video.html">
 <meta property="og:type" content="video.other">
 
-<meta property="og:video" content="https://alex-creative-site.vercel.app/temeria-preview.mp4">
-<meta property="og:video:type" content="video/mp4">
-<meta property="og:video:width" content="1280">
-<meta property="og:video:height" content="720">
-
-<meta name="twitter:card" content="summary_large_image">
-
 <style>
-body {
-  margin:0;
-  background:black;
-  color:white;
-  text-align:center;
-  font-family:Arial;
-}
-
-.container {
-  max-width:700px;
-  margin:auto;
-  padding:20px;
-}
-
-video {
-  width:100%;
-  max-width:700px;
-  border-radius:20px;
-  box-shadow:0 0 40px rgba(0,0,0,0.7);
-  margin-top:20px;
-}
-
-.top-btn {
-  display:inline-block;
-  margin-bottom:20px;
-  padding:12px 26px;
-  border-radius:30px;
-  background:white;
-  color:black;
-  font-weight:bold;
-  text-decoration:none;
-}
-
-.floating-btn {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  padding:12px 20px;
-  border-radius:30px;
-  background:linear-gradient(90deg,#7dd3fc,#c084fc);
-  color:black;
-  font-weight:bold;
-  text-decoration:none;
-}
+body{background:black;color:white;text-align:center;font-family:Arial;}
+.container{max-width:700px;margin:auto;padding:20px;}
 </style>
-
 </head>
 
 <body>
 
-<!-- 🔥 FALLBACK FACEBOOK (FONDAMENTALE) -->
-<a href="https://alex-creative-site.vercel.app/temeria-preview.mp4" style="display:block;text-decoration:none;">
-  <img src="https://alex-creative-site.vercel.app/temeria-fb.jpg" style="width:100%;max-width:700px;border-radius:20px;">
+<a href="https://alex-creative-site.vercel.app/temeria-preview.mp4">
+<img src="https://alex-creative-site.vercel.app/temeria-fb.jpg" style="width:100%;">
 </a>
 
 <div class="container">
 
-<a href="https://alex-creative-site.vercel.app" class="top-btn">🌐 Vai al sito completo</a>
-
 <h2>Temeria - Anteprima</h2>
-<p>Un frammento del mio mondo creativo. Entra in Temeria.</p>
+<p>Un frammento del mondo Temeria</p>
 
-<video controls muted autoplay playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg">
-  <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
+<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();">
+<img src="https://alex-creative-site.vercel.app/temeria-preview.jpg" style="width:100%;">
+</div>
+
+<video id="v" controls style="display:none;width:100%;">
+<source src="https://alex-creative-site.vercel.app/temeria-preview.mp4">
 </video>
 
 </div>
-
-<a href="https://alex-creative-site.vercel.app" class="floating-btn">🌐 Sito</a>
-
 </body>
 </html>
