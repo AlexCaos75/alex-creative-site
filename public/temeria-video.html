@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Temeria</title>
+<title>Temeria - Anteprima</title>
 
-<meta property="og:title" content="Temeria">
-<meta property="og:description" content="Frammento ufficiale">
+<meta property="og:title" content="Temeria - Anteprima">
+<meta property="og:description" content="Un frammento del mio mondo creativo. Entra in Temeria.">
 <meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-preview.jpg">
 <meta property="og:url" content="https://alex-creative-site.vercel.app/temeria-video.html">
 <meta property="og:type" content="video.other">
@@ -19,24 +19,44 @@ body {
   background:black;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  height:100vh;
+  justify-content:flex-start;
+  min-height:100vh;
   color:white;
   font-family:Arial;
   text-align:center;
+  padding:30px 15px;
+}
+
+.container {
+  max-width:700px;
+  width:100%;
 }
 
 video {
   width:100%;
-  max-width:900px;
+  max-width:700px;
   border-radius:20px;
   box-shadow:0 0 40px rgba(0,0,0,0.7);
+  margin-top:20px;
 }
 
-.btn {
-  margin-top:25px;
-  padding:14px 30px;
+.top-btn {
+  display:inline-block;
+  margin-bottom:20px;
+  padding:12px 26px;
+  border-radius:30px;
+  background:white;
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.floating-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:12px 20px;
   border-radius:30px;
   background:linear-gradient(90deg,#7dd3fc,#c084fc);
   color:black;
@@ -44,21 +64,26 @@ video {
   text-decoration:none;
   box-shadow:0 0 20px rgba(192,132,252,0.6);
 }
-
 </style>
 
 </head>
 
 <body>
 
-<h2>Temeria</h2>
-<p>Frammento ufficiale</p>
+<div class="container">
 
-<video controls autoplay poster="https://alex-creative-site.vercel.app/temeria-preview.jpg">
+<a href="https://alex-creative-site.vercel.app" class="top-btn">🌐 Vai al sito completo</a>
+
+<h2>Temeria - Anteprima</h2>
+<p>Un frammento del mio mondo creativo. Entra in Temeria.</p>
+
+<video controls autoplay muted playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg">
   <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
 </video>
 
-<a href="https://alex-creative-site.vercel.app" class="btn">🌐 Visita il sito completo</a>
+</div>
+
+<a href="https://alex-creative-site.vercel.app" class="floating-btn">🌐 Sito</a>
 
 </body>
 </html>
