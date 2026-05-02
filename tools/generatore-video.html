@@ -148,7 +148,14 @@ body{background:black;color:white;text-align:center;font-family:Arial;}
 
 <body>
 
-<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" style="cursor:pointer;max-width:700px;margin:auto;position:relative;">
+<!-- 🔥 IMMAGINE FACEBOOK (serve per anteprima) -->
+<a href="${url}" style="display:block;text-decoration:none;">
+<img src="${fb}" style="width:100%;max-width:700px;border-radius:20px;">
+</a>
+
+<!-- 🎬 PLAYER -->
+<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" 
+style="cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
 
 <img src="${img}" style="width:100%;border-radius:20px;">
 
@@ -173,7 +180,7 @@ box-shadow:0 0 20px rgba(0,0,0,0.6);
 
 </div>
 
-<div class="container" style="margin-top:20px;">
+<div class="container">
 
 <a href="${base}" style="
 display:block;
@@ -194,6 +201,7 @@ max-width:260px;">
 <video id="v" controls playsinline poster="${img}" style="display:none;width:100%;border-radius:20px;margin-top:15px;">
   <source src="${video}" type="video/mp4">
 </video>
+
 </div>
 
 </body>
