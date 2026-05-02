@@ -151,20 +151,15 @@ function genera() {
 body {
   margin:0;
   background:black;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  min-height:100vh;
   color:white;
-  font-family:Arial;
   text-align:center;
-  padding:30px 15px;
+  font-family:Arial;
 }
 
 .container {
   max-width:700px;
-  width:100%;
+  margin:auto;
+  padding:20px;
 }
 
 video {
@@ -203,14 +198,17 @@ video {
 
 <body>
 
+<!-- 🔥 FALLBACK FACEBOOK (FONDAMENTALE) -->
+<a href="${videoPath}" style="display:block;text-decoration:none;">
+  <img src="${imageFBPath}" style="width:100%;max-width:700px;border-radius:20px;">
+</a>
+
 <div class="container">
 
 <a href="${base}" class="top-btn">🌐 Vai al sito completo</a>
 
 <h2>${title}</h2>
 <p>${desc}</p>
-
-<img src="${imageFBPath}" style="width:100%; border-radius:20px; margin-bottom:15px;">
 
 <video controls muted autoplay playsinline poster="${imageSitePath}">
   <source src="${videoPath}" type="video/mp4">
