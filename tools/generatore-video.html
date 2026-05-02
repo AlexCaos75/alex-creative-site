@@ -30,11 +30,28 @@ button {
 }
 
 textarea {
-  height:220px;
+  height:200px;
 }
 
-h3 {
-  margin-top:30px;
+.preview {
+  margin-top:20px;
+  text-align:center;
+}
+
+.preview video {
+  width:100%;
+  max-width:500px;
+  border-radius:15px;
+}
+
+.preview img {
+  max-width:500px;
+  border-radius:15px;
+}
+
+.error {
+  color:red;
+  font-size:14px;
 }
 </style>
 </head>
@@ -45,11 +62,16 @@ h3 {
 
 <input id="title" placeholder="Titolo video">
 <textarea id="desc" placeholder="Descrizione"></textarea>
-<input id="video" placeholder="Nome file video (es: temeria-preview.mp4)">
-<input id="image" placeholder="Nome immagine (es: temeria-preview.jpg)">
+<input id="video" placeholder="Video (es: temeria-preview.mp4)">
+<input id="image" placeholder="Immagine (es: temeria-preview.jpg)">
 <input id="page" placeholder="Nome pagina (es: temeria-video)">
 
 <button onclick="genera()">🚀 Genera tutto</button>
+
+<div class="error" id="error"></div>
+
+<h3>👁 Anteprima</h3>
+<div class="preview" id="preview"></div>
 
 <h3>📄 Pagina Video</h3>
 <textarea id="output"></textarea>
@@ -61,15 +83,42 @@ h3 {
 <textarea id="linkOut"></textarea>
 
 <script>
+
+function fixPath(file) {
+  if (!file) return "";
+  if (file.startsWith("http")) return file;
+  return "https://alex-creative-site.vercel.app/" + file;
+}
+
 function genera() {
+
   const title = document.getElementById('title').value;
   const desc = document.getElementById('desc').value;
   const video = document.getElementById('video').value;
   const image = document.getElementById('image').value;
   const page = document.getElementById('page').value;
 
+  const errorBox = document.getElementById('error');
+  errorBox.innerText = "";
+
+  if (!title || !video || !image || !page) {
+    errorBox.innerText = "⚠️ Compila tutti i campi obbligatori";
+    return;
+  }
+
   const base = "https://alex-creative-site.vercel.app";
   const url = base + "/" + page + ".html";
+
+  const videoPath = fixPath(video);
+  const imagePath = fixPath(image);
+
+  // ANTEPRIMA LIVE
+  document.getElementById('preview').innerHTML = `
+    <h4>${title}</h4>
+    <img src="${imagePath}">
+    <br><br>
+    <video controls src="${videoPath}"></video>
+  `;
 
   // PAGINA VIDEO
   const codice = `<!DOCTYPE html>
@@ -81,7 +130,7 @@ function genera() {
 
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
-<meta property="og:image" content="${base}/${image}">
+<meta property="og:image" content="${imagePath}">
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="video.other">
 
@@ -117,12 +166,8 @@ video {
   font-weight:bold;
   text-decoration:none;
   box-shadow:0 0 20px rgba(192,132,252,0.6);
-  transition:0.3s;
 }
 
-.btn:hover {
-  transform:scale(1.05);
-}
 </style>
 
 </head>
@@ -132,8 +177,8 @@ video {
 <h2>${title}</h2>
 <p>${desc}</p>
 
-<video controls autoplay poster="${base}/${image}">
-  <source src="${base}/${video}" type="video/mp4">
+<video controls autoplay poster="${imagePath}">
+  <source src="${videoPath}" type="video/mp4">
 </video>
 
 <a href="${base}" class="btn">🌐 Visita il sito completo</a>
@@ -150,7 +195,7 @@ video {
   max-width:400px;
   margin:auto;
 ">
-  <img src="${base}/${image}" style="width:100%;display:block;">
+  <img src="${imagePath}" style="width:100%;">
   <div style="
     position:absolute;
     bottom:0;
@@ -169,6 +214,7 @@ video {
   document.getElementById('indexBlock').value = blocco;
   document.getElementById('linkOut').value = url;
 }
+
 </script>
 
 </body>
