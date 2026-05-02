@@ -11,7 +11,6 @@ body {
   font-family:Arial;
   padding:20px;
 }
-
 input, textarea {
   width:100%;
   padding:10px;
@@ -19,7 +18,6 @@ input, textarea {
   border-radius:10px;
   border:none;
 }
-
 button {
   padding:10px;
   margin:4px;
@@ -28,23 +26,19 @@ button {
   cursor:pointer;
   font-weight:bold;
 }
-
 .main-btn { background:#22c55e; color:black; }
 .copy-btn { background:white; color:black; }
 .danger { background:#ef4444; color:white; }
-
 .box {
   background:#111827;
   padding:15px;
   border-radius:15px;
   margin-top:15px;
 }
-
 .preview img, .preview video {
   max-width:400px;
   border-radius:15px;
 }
-
 .card {
   background:#1f2937;
   padding:10px;
@@ -57,13 +51,13 @@ button {
 
 <body>
 
-<h2>🚀 Temeria ULTRA Generator</h2>
+<h2>🚀 Temeria ULTRA Generator PRO</h2>
 
 <input id="title" placeholder="Titolo">
 <textarea id="desc" placeholder="Descrizione"></textarea>
 <input id="video" placeholder="Video.mp4">
 <input id="imageSite" placeholder="Immagine SITO">
-<input id="imageFB" placeholder="Immagine FACEBOOK">
+<input id="imageFB" placeholder="Immagine FACEBOOK (opzionale)">
 <input id="page" placeholder="Nome pagina">
 
 <button class="main-btn" onclick="genera()">🚀 Genera</button>
@@ -101,8 +95,8 @@ function fix(file){
 
 function genera(){
 
-if(!titleEl().value || !videoEl().value || !imageEl().value || !imageFBEl().value || !pageEl().value){
- alert("Compila tutti i campi");
+if(!titleEl().value || !videoEl().value || !imageEl().value || !pageEl().value){
+ alert("Compila almeno titolo, video, immagine sito e pagina");
  return;
 }
 
@@ -110,7 +104,9 @@ const title = titleEl().value;
 const desc = descEl().value;
 const video = fix(videoEl().value);
 const img = fix(imageEl().value);
-const fb = fix(imageFBEl().value);
+
+// 🔥 AUTOMATICO: fallback FB image
+let fb = imageFBEl().value ? fix(imageFBEl().value) : img;
 
 // URL pulito
 let page = pageEl().value
@@ -139,11 +135,17 @@ const html = `<!DOCTYPE html>
 <meta charset="UTF-8">
 <title>${title}</title>
 
+<!-- OPEN GRAPH (FIXATO) -->
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
 <meta property="og:image" content="${fb}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="video.other">
+
+<!-- TWITTER -->
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
 body{background:black;color:white;text-align:center;font-family:Arial;}
