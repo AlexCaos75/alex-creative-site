@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Temeria - Anteprima</title>
+<title>Temeria</title>
 
-<meta property="og:title" content="Temeria - Anteprima">
-<meta property="og:description" content="Un frammento del mio mondo creativo. Entra in Temeria.">
-<meta property="og:image" content="https://alexcaos75.github.io/alex-creative-site/public/temeria-preview.jpg">
-<meta property="og:url" content="https://alexcaos75.github.io/alex-creative-site/temeria-video.html">
+<meta property="og:title" content="Temeria">
+<meta property="og:description" content="Frammento ufficiale">
+<meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-preview.jpg">
+<meta property="og:url" content="https://alex-creative-site.vercel.app/temeria-video.html">
 <meta property="og:type" content="video.other">
 
 <meta name="twitter:card" content="summary_large_image">
@@ -18,14 +18,36 @@ body {
   margin:0;
   background:black;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   height:100vh;
+  color:white;
+  font-family:Arial;
+  text-align:center;
 }
+
 video {
   width:100%;
   max-width:900px;
   border-radius:20px;
+  box-shadow:0 0 40px rgba(0,0,0,0.7);
+}
+
+.btn {
+  margin-top:25px;
+  padding:14px 30px;
+  border-radius:30px;
+  background:linear-gradient(90deg,#7dd3fc,#c084fc);
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+  box-shadow:0 0 20px rgba(192,132,252,0.6);
+  transition:0.3s;
+}
+
+.btn:hover {
+  transform:scale(1.05);
 }
 </style>
 
@@ -33,9 +55,14 @@ video {
 
 <body>
 
-<video controls autoplay>
-  <source src="https://alexcaos75.github.io/alex-creative-site/public/temeria-preview.mp4" type="video/mp4">
+<h2>Temeria</h2>
+<p>Frammento ufficiale</p>
+
+<video controls autoplay poster="https://alex-creative-site.vercel.app/temeria-preview.jpg">
+  <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
 </video>
+
+<a href="https://alex-creative-site.vercel.app" class="btn">🌐 Visita il sito completo</a>
 
 </body>
 </html>
