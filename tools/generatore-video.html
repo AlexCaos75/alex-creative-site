@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Generatore Video FB</title>
+<title>🎬 Generatore Video Temeria PRO</title>
+
 <style>
 body {
   background:#0b0f1a;
@@ -10,6 +11,7 @@ body {
   font-family:Arial;
   padding:30px;
 }
+
 input, textarea {
   width:100%;
   padding:10px;
@@ -17,6 +19,7 @@ input, textarea {
   border-radius:10px;
   border:none;
 }
+
 button {
   padding:12px 20px;
   background:white;
@@ -25,15 +28,20 @@ button {
   border-radius:10px;
   cursor:pointer;
 }
-textarea#output {
-  height:300px;
+
+textarea {
+  height:220px;
+}
+
+h3 {
+  margin-top:30px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>🎬 Generatore Video Facebook</h2>
+<h2>🎬 Generatore Video Temeria PRO</h2>
 
 <input id="title" placeholder="Titolo video">
 <textarea id="desc" placeholder="Descrizione"></textarea>
@@ -41,10 +49,16 @@ textarea#output {
 <input id="image" placeholder="Nome immagine (es: temeria-preview.jpg)">
 <input id="page" placeholder="Nome pagina (es: temeria-video)">
 
-<button onclick="genera()">Genera</button>
+<button onclick="genera()">🚀 Genera tutto</button>
 
-<h3>📄 Codice pronto:</h3>
+<h3>📄 Pagina Video</h3>
 <textarea id="output"></textarea>
+
+<h3>🌐 Blocco per index.html</h3>
+<textarea id="indexBlock"></textarea>
+
+<h3>🔗 Link pronto</h3>
+<textarea id="linkOut"></textarea>
 
 <script>
 function genera() {
@@ -54,8 +68,10 @@ function genera() {
   const image = document.getElementById('image').value;
   const page = document.getElementById('page').value;
 
-  const url = "https://alexcaos75.github.io/alex-creative-site/" + page + ".html";
+  const base = "https://alex-creative-site.vercel.app";
+  const url = base + "/" + page + ".html";
 
+  // PAGINA VIDEO
   const codice = `<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -65,7 +81,7 @@ function genera() {
 
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
-<meta property="og:image" content="https://alexcaos75.github.io/alex-creative-site/public/${image}">
+<meta property="og:image" content="${base}/${image}">
 <meta property="og:url" content="${url}">
 <meta property="og:type" content="video.other">
 
@@ -76,14 +92,36 @@ body {
   margin:0;
   background:black;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   height:100vh;
+  color:white;
+  font-family:Arial;
+  text-align:center;
 }
+
 video {
   width:100%;
   max-width:900px;
   border-radius:20px;
+  box-shadow:0 0 40px rgba(0,0,0,0.7);
+}
+
+.btn {
+  margin-top:25px;
+  padding:14px 30px;
+  border-radius:30px;
+  background:linear-gradient(90deg,#7dd3fc,#c084fc);
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+  box-shadow:0 0 20px rgba(192,132,252,0.6);
+  transition:0.3s;
+}
+
+.btn:hover {
+  transform:scale(1.05);
 }
 </style>
 
@@ -91,14 +129,45 @@ video {
 
 <body>
 
-<video controls autoplay>
-  <source src="https://alexcaos75.github.io/alex-creative-site/public/${video}" type="video/mp4">
+<h2>${title}</h2>
+<p>${desc}</p>
+
+<video controls autoplay poster="${base}/${image}">
+  <source src="${base}/${video}" type="video/mp4">
 </video>
+
+<a href="${base}" class="btn">🌐 Visita il sito completo</a>
 
 </body>
 </html>`;
 
+  // BLOCCO INDEX
+  const blocco = `<a href="${url}" style="text-decoration:none;color:white;">
+<div style="
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  max-width:400px;
+  margin:auto;
+">
+  <img src="${base}/${image}" style="width:100%;display:block;">
+  <div style="
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:10px;
+    background:rgba(0,0,0,0.7);
+  ">
+    <strong>${title}</strong>
+    <p style="margin:0;font-size:13px;">Guarda il frammento</p>
+  </div>
+</div>
+</a>`;
+
   document.getElementById('output').value = codice;
+  document.getElementById('indexBlock').value = blocco;
+  document.getElementById('linkOut').value = url;
 }
 </script>
 
