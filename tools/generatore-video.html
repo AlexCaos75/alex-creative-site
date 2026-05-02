@@ -112,7 +112,7 @@ function genera() {
   const videoPath = fixPath(video);
   const imagePath = fixPath(image);
 
-  // ANTEPRIMA LIVE
+  // ANTEPRIMA
   document.getElementById('preview').innerHTML = `
     <h4>${title}</h4>
     <img src="${imagePath}">
@@ -142,24 +142,44 @@ body {
   background:black;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  height:100vh;
+  justify-content:flex-start;
+  min-height:100vh;
   color:white;
   font-family:Arial;
   text-align:center;
+  padding:30px 15px;
+}
+
+.container {
+  max-width:700px;
+  width:100%;
 }
 
 video {
   width:100%;
-  max-width:900px;
+  max-width:700px;
   border-radius:20px;
   box-shadow:0 0 40px rgba(0,0,0,0.7);
+  margin-top:20px;
 }
 
-.btn {
-  margin-top:25px;
-  padding:14px 30px;
+.top-btn {
+  display:inline-block;
+  margin-bottom:20px;
+  padding:12px 26px;
+  border-radius:30px;
+  background:white;
+  color:black;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.floating-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:12px 20px;
   border-radius:30px;
   background:linear-gradient(90deg,#7dd3fc,#c084fc);
   color:black;
@@ -167,48 +187,84 @@ video {
   text-decoration:none;
   box-shadow:0 0 20px rgba(192,132,252,0.6);
 }
-
 </style>
 
 </head>
 
 <body>
 
+<div class="container">
+
+<a href="${base}" class="top-btn">🌐 Vai al sito completo</a>
+
 <h2>${title}</h2>
 <p>${desc}</p>
 
-<video controls autoplay poster="${imagePath}">
+<video controls autoplay muted playsinline poster="${imagePath}">
   <source src="${videoPath}" type="video/mp4">
 </video>
 
-<a href="${base}" class="btn">🌐 Visita il sito completo</a>
+</div>
+
+<a href="${base}" class="floating-btn">🌐 Sito</a>
 
 </body>
 </html>`;
 
-  // BLOCCO INDEX
-  const blocco = `<a href="${url}" style="text-decoration:none;color:white;">
-<div style="
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-  max-width:400px;
-  margin:auto;
-">
-  <img src="${imagePath}" style="width:100%;">
-  <div style="
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    padding:10px;
-    background:rgba(0,0,0,0.7);
-  ">
-    <strong>${title}</strong>
-    <p style="margin:0;font-size:13px;">Guarda il frammento</p>
-  </div>
-</div>
-</a>`;
+  // BLOCCO INDEX (coerente con Temeria)
+  const blocco = `
+<article class="temeria-video-panel">
+
+  <div class="video-tag">🎬 Video teaser</div>
+
+  <h3 style="font-size:22px;margin:0 0 10px;">
+    ${title}
+  </h3>
+
+  <p style="color:rgba(255,255,255,0.7);margin-bottom:15px;">
+    Guarda il frammento
+  </p>
+
+  <a href="${url}">
+
+    <div style="position:relative;overflow:hidden;border-radius:18px;">
+
+      <img 
+        src="${imagePath}" 
+        style="width:100%;display:block;"
+      >
+
+      <div style="
+        position:absolute;
+        inset:0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(0,0,0,0.35);
+      ">
+
+        <div style="
+          width:70px;
+          height:70px;
+          border-radius:50%;
+          background:white;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:26px;
+          color:black;
+          box-shadow:0 0 30px rgba(255,255,255,0.5);
+        ">
+          ▶
+        </div>
+
+      </div>
+
+    </div>
+
+  </a>
+
+</article>`;
 
   document.getElementById('output').value = codice;
   document.getElementById('indexBlock').value = blocco;
