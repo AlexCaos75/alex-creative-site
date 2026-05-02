@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Temeria</title>
+<title>Temeria - La Fata delle Piume</title>
 
-<meta property="og:title" content="Temeria">
-<meta property="og:description" content="Un frammento del mondo Temeria">
+<meta property="og:title" content="Temeria - La Fata delle Piume">
+<meta property="og:description" content="Un frammento del mondo di Temeria.
+Lasciati trasportare tra musica e magia.">
 <meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-fb.jpg">
-<meta property="og:url" content="https://alex-creative-site.vercel.app/temeria-video.html">
+<meta property="og:url" content="https://alex-creative-site.vercel.app/temeriahtml.html">
 <meta property="og:type" content="video.other">
 
 <style>
@@ -18,11 +19,34 @@ body{background:black;color:white;text-align:center;font-family:Arial;}
 
 <body>
 
-<a href="https://alex-creative-site.vercel.app/temeria-preview.mp4" style="display:block;text-decoration:none;">
-<img src="https://alex-creative-site.vercel.app/temeria-fb.jpg" style="width:100%;max-width:700px;border-radius:20px;">
-</a>
+<!-- PLAYER COVER -->
+<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" 
+style="cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
 
-<div class="container" style="margin-top:20px;">
+<img src="https://alex-creative-site.vercel.app/temeria-preview.jpg" style="width:100%;border-radius:20px;">
+
+<div style="
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:80px;
+height:80px;
+border-radius:50%;
+background:rgba(255,255,255,0.9);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+color:black;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+">
+▶
+</div>
+
+</div>
+
+<div class="container">
 
 <a href="https://alex-creative-site.vercel.app" style="
 display:block;
@@ -37,16 +61,15 @@ max-width:260px;">
 🏠 Torna alla home
 </a>
 
-<h2>Temeria</h2>
-<p>Un frammento del mondo Temeria</p>
+<h2>Temeria - La Fata delle Piume</h2>
+<p>Un frammento del mondo di Temeria.
+Lasciati trasportare tra musica e magia.</p>
 
-<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" style="cursor:pointer;">
-<img src="https://alex-creative-site.vercel.app/temeria-preview.jpg" style="width:100%;border-radius:20px;">
-</div>
-
-<video id="v" controls playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg" style="display:none;width:100%;border-radius:20px;margin-top:15px;">
+<video id="v" controls playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg" 
+style="display:none;width:100%;border-radius:20px;margin-top:15px;">
   <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
 </video>
+
 </div>
 
 </body>
