@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Generatore Video FB</title>
+<style>
+body {
+  background:#0b0f1a;
+  color:white;
+  font-family:Arial;
+  padding:30px;
+}
+input, textarea {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:10px;
+  border:none;
+}
+button {
+  padding:12px 20px;
+  background:white;
+  color:black;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+textarea#output {
+  height:300px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🎬 Generatore Video Facebook</h2>
+
+<input id="title" placeholder="Titolo video">
+<textarea id="desc" placeholder="Descrizione"></textarea>
+<input id="video" placeholder="Nome file video (es: temeria-preview.mp4)">
+<input id="image" placeholder="Nome immagine (es: temeria-preview.jpg)">
+<input id="page" placeholder="Nome pagina (es: temeria-video)">
+
+<button onclick="genera()">Genera</button>
+
+<h3>📄 Codice pronto:</h3>
+<textarea id="output"></textarea>
+
+<script>
+function genera() {
+  const title = document.getElementById('title').value;
+  const desc = document.getElementById('desc').value;
+  const video = document.getElementById('video').value;
+  const image = document.getElementById('image').value;
+  const page = document.getElementById('page').value;
+
+  const url = "https://alexcaos75.github.io/alex-creative-site/" + page + ".html";
+
+  const codice = `<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+
+<title>${title}</title>
+
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">
+<meta property="og:image" content="https://alexcaos75.github.io/alex-creative-site/public/${image}">
+<meta property="og:url" content="${url}">
+<meta property="og:type" content="video.other">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+body {
+  margin:0;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+video {
+  width:100%;
+  max-width:900px;
+  border-radius:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<video controls autoplay>
+  <source src="https://alexcaos75.github.io/alex-creative-site/public/${video}" type="video/mp4">
+</video>
+
+</body>
+</html>`;
+
+  document.getElementById('output').value = codice;
+}
+</script>
+
+</body>
+</html>
