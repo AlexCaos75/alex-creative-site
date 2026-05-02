@@ -63,8 +63,8 @@ textarea {
 <input id="title" placeholder="Titolo video">
 <textarea id="desc" placeholder="Descrizione"></textarea>
 <input id="video" placeholder="Video (es: temeria-preview.mp4)">
-<input id="imageSite" placeholder="Immagine SITO (es: temeria-sito.jpg)">
-<input id="imageFB" placeholder="Immagine FACEBOOK 1200x630 (es: temeria-facebook.jpg)">
+<input id="imageSite" placeholder="Immagine SITO (es: temeria-preview.jpg)">
+<input id="imageFB" placeholder="Immagine FACEBOOK 1200x630 (es: temeria-fb.jpg)">
 <input id="page" placeholder="Nome pagina (es: temeria-video)">
 
 <button onclick="genera()">🚀 Genera tutto</button>
@@ -123,7 +123,7 @@ function genera() {
     <video controls src="${videoPath}"></video>
   `;
 
-  // PAGINA VIDEO (FIX FACEBOOK)
+  // PAGINA VIDEO DEFINITIVA
   const codice = `<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -134,10 +134,11 @@ function genera() {
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${desc}">
 <meta property="og:image" content="${imageFBPath}">
-<meta property="og:url" content="${url}">
-<meta property="og:type" content="video.other">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:url" content="${url}">
+<meta property="og:type" content="video.other">
 
 <meta property="og:video" content="${videoPath}">
 <meta property="og:video:type" content="video/mp4">
@@ -209,7 +210,6 @@ video {
 <h2>${title}</h2>
 <p>${desc}</p>
 
-<!-- IMMAGINE VISIBILE (fix Facebook) -->
 <img src="${imageFBPath}" style="width:100%; border-radius:20px; margin-bottom:15px;">
 
 <video controls muted autoplay playsinline poster="${imageSitePath}">
@@ -223,7 +223,7 @@ video {
 </body>
 </html>`;
 
-  // BLOCCO INDEX (NON TOCCA FACEBOOK)
+  // BLOCCO INDEX
   const blocco = `<a href="${url}" style="text-decoration:none;color:white;">
 <div style="border-radius:20px;overflow:hidden;position:relative;max-width:400px;margin:auto;">
   <img src="${imageSitePath}" style="width:100%;">
