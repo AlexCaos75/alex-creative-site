@@ -2,22 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Temeria - La Fata delle Piume</title>
 
-<!-- OPEN GRAPH (FIXATO) -->
-<meta property="og:title" content="Temeria - La Fata delle Piume">
-<meta property="og:description" content="Una presenza che non si vede… ma si sente.
-Tra sogno e realtà nasce Temeria, la fata delle piume.
+<link rel="icon" href="https://alex-creative-site.vercel.app/temeria-preview.jpg">
 
-Un viaggio tra musica, emozione e magia.
-Lasciati trasportare.">
+<meta property="og:title" content="Temeria - La Fata delle Piume">
+<meta property="og:description" content="Una presenza che non si vede… ma si sente. Tra sogno e realtà nasce Temeria, la fata delle piume. Un viaggio tra musica, emozione e magia. Lasciati trasportare.">
 <meta property="og:image" content="https://alex-creative-site.vercel.app/temeria-fb2.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://alex-creative-site.vercel.app/temeria-video.html">
 <meta property="og:type" content="video.other">
+<meta property="og:site_name" content="Alex Creative Site">
 
-<!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
@@ -28,9 +27,16 @@ body{background:black;color:white;text-align:center;font-family:Arial;}
 
 <body>
 
-<!-- PLAYER COVER -->
-<div onclick="this.style.display='none';document.getElementById('v').style.display='block';document.getElementById('v').play();" 
-style="cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
+<div onclick="
+this.style.opacity='0';
+setTimeout(()=>{
+ this.style.display='none';
+ let v=document.getElementById('v');
+ v.style.display='block';
+ v.play();
+},300);
+"
+style="transition:0.3s;cursor:pointer;max-width:700px;margin:20px auto;position:relative;">
 
 <img src="https://alex-creative-site.vercel.app/temeria-preview.jpg" style="width:100%;border-radius:20px;">
 
@@ -71,13 +77,9 @@ max-width:260px;">
 </a>
 
 <h2>Temeria - La Fata delle Piume</h2>
-<p>Una presenza che non si vede… ma si sente.
-Tra sogno e realtà nasce Temeria, la fata delle piume.
+<p>Una presenza che non si vede… ma si sente. Tra sogno e realtà nasce Temeria, la fata delle piume. Un viaggio tra musica, emozione e magia. Lasciati trasportare.</p>
 
-Un viaggio tra musica, emozione e magia.
-Lasciati trasportare.</p>
-
-<video id="v" controls playsinline poster="https://alex-creative-site.vercel.app/temeria-preview.jpg" 
+<video id="v" controls playsinline preload="metadata" poster="https://alex-creative-site.vercel.app/temeria-preview.jpg" 
 style="display:none;width:100%;border-radius:20px;margin-top:15px;">
   <source src="https://alex-creative-site.vercel.app/temeria-preview.mp4" type="video/mp4">
 </video>
