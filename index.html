@@ -242,10 +242,7 @@
     .video-grid { grid-template-columns: repeat(2, 1fr); }
 
 .temeria-wide {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr; /* 👈 cambiato */
-  gap: 20px;
+  display: block;
 }
 
 .temeria-art {
@@ -830,27 +827,65 @@
       </div>
     </article>
 
+<article class="temeria-wide">
 
-<article class="video-card">
-  <div class="video-frame">
-    <iframe
-      src="https://www.youtube.com/embed/duCUKxBCqiU"
-      title="Temeria – La Fata delle Piume"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
-  <div class="video-content">
-    <div class="video-tag">▶ YouTube ufficiale</div>
-    <h3>Temeria – La Fata delle Piume</h3>
-    <p class="lead" style="font-size:15px;">
-      Il videoclip ufficiale di “Temeria – La Fata delle Piume”.
+  <div class="temeria-video-panel">
+   <div class="video-tag">🎬 Trailer / prossima uscita</div>
 
-Un viaggio tra musica, luce e simboli, dove ogni immagine racconta qualcosa che non si vede, ma si sente.
+   <h3 style="font-size:26px; margin:0 0 12px;">
+  Area trailer
+</h3>
 
-Un progetto creativo firmato Alex Creative.
+    <p style="color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 18px;">
+      Un assaggio riservato prima dell’uscita ufficiale su tutte le piattaforme.
     </p>
+
+    <a href="https://alex-creative-site.vercel.app/temeria-video.html"
+       style="display:block; cursor:pointer;">
+
+      <div style="position:relative; overflow:hidden; border-radius:18px;">
+
+        <!-- IMMAGINE -->
+        <img 
+          src="https://alex-creative-site.vercel.app/temeria-preview.jpg"
+          alt="Temeria preview"
+          loading="lazy"
+          style="width:100%; display:block; transition:0.3s;"
+        >
+
+        <!-- OVERLAY -->
+        <div style="
+          position:absolute;
+          inset:0;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background:rgba(0,0,0,0.35);
+        ">
+
+          <!-- PLAY -->
+         <div style="
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  color:black;
+  box-shadow:0 0 30px rgba(255,255,255,0.5);
+">
+            ▶
+          </div>
+
+        </div>
+
+      </div>
+    </a>
+
   </div>
+
 </article>
 </div>
   <!-- 🔥 SPOTIFY SECTION -->
