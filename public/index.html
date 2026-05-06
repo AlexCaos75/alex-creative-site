@@ -683,9 +683,13 @@
 #page-lyrics .lyrics-cover {
   height: 380px;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+background-color: #050816;
   background-repeat: no-repeat;
   position: relative;
+  box-shadow:
+  inset 0 0 80px rgba(0,0,0,0.45),
+  0 20px 40px rgba(0,0,0,0.35);
 }
 
 #page-lyrics .lyrics-cover::after {
@@ -701,10 +705,18 @@
 }
 
 #page-lyrics .video-content {
-  padding: 26px;
-  backdrop-filter: blur(8px);
-}
+  padding: 30px;
+  backdrop-filter: blur(10px);
 
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,15,35,0.96),
+      rgba(5,8,22,0.98)
+    );
+
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
 #page-lyrics .lyrics-box {
   margin-top: 18px;
   max-height: 300px;
@@ -716,6 +728,17 @@
   line-height: 1.9;
   color: rgba(255,255,255,0.88);
   white-space: pre-line;
+}
+#page-lyrics h3 {
+  font-size: 34px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  letter-spacing: -0.03em;
+}
+
+#page-lyrics .lead {
+  color: rgba(255,255,255,0.72);
+  line-height: 1.8;
 }
   </style>
 </head>
@@ -1004,7 +1027,7 @@ Un viaggio tra musica, luce e simboli, dove ogni immagine si sente più di quant
 
   <div
   class="lyrics-cover"
-  style="background-image:url('https://i.postimg.cc/9F02nj1N/Immagine-R-C.jpg');">
+  style="background-image:url('https://i.postimg.cc/4xmJmH0z/Immagine-R-C.jpg');">
 </div>
   <div class="video-content">
 
