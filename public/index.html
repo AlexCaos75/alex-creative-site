@@ -669,6 +669,28 @@
 .temeria-video-panel a div div {
   transition: 0.3s;
 }
+/* -------- SEZIONE TESTI / LYRICS -------- */
+
+#page-lyrics .video-card {
+  overflow: hidden;
+}
+
+#page-lyrics .video-content {
+  backdrop-filter: blur(8px);
+}
+
+#page-lyrics .lyrics-box {
+  margin-top: 18px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  line-height: 1.9;
+  color: rgba(255,255,255,0.85);
+  white-space: pre-line;
+}
   </style>
 </head>
 <body>
@@ -686,6 +708,7 @@
         <a href="#" class="nav-link active" data-page="home">Home</a>
         <a href="#" class="nav-link" data-page="gallery">Immagini</a>
         <a href="#" class="nav-link" data-page="videos">Video</a>
+        <a href="#" class="nav-link" data-page="lyrics">Testi</a>
         <a href="#" class="nav-link" data-page="chat">Chat</a>
         <a href="#" class="nav-link" data-page="contacts">Contatti</a>
       </nav>
@@ -711,7 +734,7 @@
           <div class="stats-panel">
             <div style="display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;">♫ Hub multimediale</div>
             <div class="stats-grid">
-              <div class="mini"><strong>5</strong>Sezioni smart</div>
+              <div class="mini"><strong>6</strong>Sezioni smart</div>
               <div class="mini"><strong>24/7</strong>Presenza online</div>
               <div class="mini"><strong>HD</strong>Immagini e video</div>
               <div class="mini"><strong>Live</strong>Area interazione</div>
@@ -935,7 +958,67 @@ Un viaggio tra musica, luce e simboli, dove ogni immagine si sente più di quant
 </div>
 
 </section>
+<section class="page" id="page-lyrics">
 
+  <div class="section-title">
+    <div class="eyebrow">✦ Lyrics</div>
+
+    <h2>Parole che diventano musica</h2>
+
+    <p>
+      Uno spazio dedicato ai testi ufficiali delle canzoni pubblicate,
+      tra emozioni, immagini, simboli e frammenti di anima.
+    </p>
+  </div>
+
+  <div class="video-grid">
+
+    <!-- REGINA DI CUORI -->
+    <article class="video-card">
+
+      <div style="
+        height:320px;
+        background:url('https://alex-creative-site.vercel.app/regina-cover.jpg') center/cover no-repeat;
+      "></div>
+
+      <div class="video-content">
+
+        <div class="video-tag">🎵 Testo ufficiale</div>
+
+        <h3>Regina di Cuori</h3>
+
+        <p class="lead" style="font-size:15px;">
+          Un viaggio tra desiderio, caos e sentimenti che bruciano lentamente.
+        </p>
+
+      <div class="lyrics-box">
+
+[Inserisci qui il testo di Regina di Cuori]
+
+        </div>
+
+        <div class="button-row" style="margin-top:20px;">
+
+          <a href="https://open.spotify.com/"
+             target="_blank"
+             class="btn primary">
+             🎧 Spotify
+          </a>
+
+          <a href="https://youtube.com/"
+             target="_blank"
+             class="btn secondary">
+             ▶ YouTube
+          </a>
+
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+
+</section>
     <section class="page" id="page-chat">
       <div class="section-title">
         <div class="eyebrow">✦ Chat</div>
@@ -1035,7 +1118,7 @@ Un viaggio tra musica, luce e simboli, dove ogni immagine si sente più di quant
       </div>
       <div>
         <div class="footer-title">Sezioni</div>
-        Home · Immagini · Video · Chat · Contatti
+       Home · Immagini · Video · Testi · Chat · Contatti
       </div>
       <div>
         <div class="footer-title">Prossimi step</div>
