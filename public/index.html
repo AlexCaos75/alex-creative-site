@@ -671,24 +671,50 @@
 }
 /* -------- SEZIONE TESTI / LYRICS -------- */
 
+#page-lyrics .video-grid {
+  align-items: start;
+}
+
 #page-lyrics .video-card {
   overflow: hidden;
+  border-radius: 32px;
+}
+
+#page-lyrics .lyrics-cover {
+  height: 380px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+#page-lyrics .lyrics-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.45),
+    rgba(255,130,0,0.08),
+    rgba(0,0,0,0.05)
+  );
 }
 
 #page-lyrics .video-content {
+  padding: 26px;
   backdrop-filter: blur(8px);
 }
 
 #page-lyrics .lyrics-box {
   margin-top: 18px;
-  max-height: 260px;
+  max-height: 300px;
   overflow: auto;
-  padding: 18px;
-  border-radius: 18px;
+  padding: 20px;
+  border-radius: 20px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   line-height: 1.9;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.88);
   white-space: pre-line;
 }
   </style>
@@ -976,11 +1002,10 @@ Un viaggio tra musica, luce e simboli, dove ogni immagine si sente più di quant
 
 <article class="video-card">
 
-  <div style="
-    height:320px;
-    background:url('https://i.postimg.cc/9F02nj1N/Immagine-R-C.jpg') center/cover no-repeat;
-  "></div>
-
+  <div
+  class="lyrics-cover"
+  style="background-image:url('https://i.postimg.cc/9F02nj1N/Immagine-R-C.jpg');">
+</div>
   <div class="video-content">
 
     <div class="video-tag">🎵 Testo ufficiale</div>
